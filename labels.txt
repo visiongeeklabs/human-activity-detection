@@ -1,0 +1,80 @@
+bend/bow (at the waist)
+N/A
+crouch/kneel
+dance
+fall down
+get up
+jump/leap
+lie/sleep
+martial art
+run/jog
+sit
+stand
+swim
+walk
+answer phone
+N/A
+carry/hold (an object)
+N/A
+N/A
+climb (e.g., a mountain)
+N/A
+close (e.g., a door, a box)
+N/A
+cut
+N/A
+dress/put on clothing
+drink
+drive (e.g., a car, a truck)
+eat
+enter
+N/A
+N/A
+N/A
+hit (an object)
+N/A
+lift/pick up
+listen (e.g., to music)
+open (e.g., a window, a car door)
+N/A
+N/A
+play musical instrument
+N/A
+point to (an object)
+N/A
+pull (an object)
+push (an object)
+put down
+read
+ride (e.g., a bike, a car, a horse)
+N/A
+sail boat
+shoot
+N/A
+smoke
+N/A
+take a photo
+text on/look at a cellphone
+throw
+touch (an object)
+turn (e.g., a screwdriver)
+watch (e.g., TV)
+work on a computer
+write
+fight/hit (a person)
+give/serve (an object) to (a person)
+grab (a person)
+hand clap
+hand shake
+hand wave
+hug (a person)
+N/A
+kiss (a person)
+lift (a person)
+listen to (a person)
+N/A
+push (another person)
+sing to (e.g., self, a person, a group)
+take (an object) from (a person)
+talk to (e.g., self, a person, a group)
+watch (a person)
