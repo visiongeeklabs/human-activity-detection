@@ -49,21 +49,21 @@ height = video.get(cv2.CAP_PROP_FRAME_HEIGHT)
 fps = video.get(cv2.CAP_PROP_FPS)
 
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-writer = cv2.VideoWriter('detection_output.mp4', fourcc, int(fps), (int(width),int(height)))
+writer = cv2.VideoWriter('activity_detection_output.mp4', fourcc, int(fps), (int(width),int(height)))
 
 
 while video.isOpened():
 
-    status, image = video.read()
+    status, frame = video.read()
 
     if not status:
         break
     
-    image_exp = np.expand_dims(image, axis=0)
-    start = time.time()
-    output_dict = sess.run(tensor_dict, feed_dict={image_tensor: image_exp})
-    finish = time.time()
-    print("inference time: ", finish - start)
+    frame_exp = np.expand_dims(frame, axis=0)
+    t1 = time.time()
+    output_dict = sess.run(tensor_dict, feed_dict={image_tensor: frame_exp})
+    t2 = time.time()
+    print("inference time: ", t2 - t1)
 
     output_dict['num_detections'] = int(output_dict['num_detections'][0])
     output_dict['detection_classes'] = output_dict[
@@ -71,8 +71,9 @@ while video.isOpened():
     output_dict['detection_boxes'] = output_dict['detection_boxes'][0]
     output_dict['detection_scores'] = output_dict['detection_scores'][0]
 
-    out = image.copy()
     threshold = 0.5
+    colors = np.random.uniform(0, 255, size=(80, 3))
+
     for i in range(output_dict['num_detections']):
         if int(output_dict['detection_classes'][i]) not in [1,3,17,37,43,45,46,47,59,65,74,77,78,79,80]:
             if output_dict['detection_scores'][i] > threshold:
@@ -85,12 +86,12 @@ while video.isOpened():
                 bbox[2] *= height
                 bbox[3] *= width
                 print((int(bbox[1]), int(bbox[0])), (int(bbox[3]), int(bbox[2])))
-                cv2.rectangle(out, (int(bbox[1]), int(bbox[0])), (int(bbox[3]), int(bbox[2])), (0,255,0), 2)
-                cv2.putText(out, labels[int(output_dict['detection_classes'][i])-1], (int(bbox[1]),int(bbox[0]-10)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 2)
+                idx = int(output_dict['detection_classes'][i]) - 1
+                cv2.rectangle(frame, (int(bbox[1]), int(bbox[0])), (int(bbox[3]), int(bbox[2])), colors[idx], 2)
+                cv2.putText(frame, labels[idx], (int(bbox[1]),int(bbox[0]-10)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, colors[idx], 2)
 
-    writer.write(out)
+    writer.write(frame)
     
 video.release()
-cv2.destroyAllWindows()
 writer.release()
 sess.close()
