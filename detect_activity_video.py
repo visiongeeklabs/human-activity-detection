@@ -4,10 +4,9 @@ import sys
 import cv2
 import tensorflow.compat.v1 as tf
 
-PATH_TO_FROZEN_GRAPH = 'frozen_inference_graph.pb'
-PATH_TO_LABELS = 'labels.txt'
+frozen_graph_path = 'frozen_inference_graph.pb' 
 
-with open(PATH_TO_LABELS, 'r') as f:
+with open('labels.txt', 'r') as f:
   labels = [line.strip() for line in f.readlines()]
 
 detection_graph = tf.Graph()
@@ -15,7 +14,7 @@ with detection_graph.as_default():
     od_graph_def = tf.GraphDef()
     
     t1 = time.time()
-    fid = tf.gfile.GFile(PATH_TO_FROZEN_GRAPH, 'rb')
+    fid = tf.gfile.GFile(frozen_graph_path, 'rb')
     serialized_graph = fid.read()
     od_graph_def.ParseFromString(serialized_graph)
     tf.import_graph_def(od_graph_def, name='')
@@ -23,9 +22,7 @@ with detection_graph.as_default():
     print("model loading time: ", t2 - t1)
 
     sess = tf.Session(graph=detection_graph)
-
     ops = tf.get_default_graph().get_operations()
-
     all_tensor_names = {output.name for op in ops for output in op.outputs}
     tensor_dict = {}
 
@@ -56,9 +53,7 @@ writer = cv2.VideoWriter('activity_detection_output.mp4', fourcc, int(fps), (int
 
 frame_count = 0
 while video.isOpened():
-
     status, frame = video.read()
-
     if not status:
         break
     
@@ -95,9 +90,8 @@ while video.isOpened():
                 idx = int(output_dict['detection_classes'][i]) - 1
                 cv2.rectangle(frame, (int(bbox[1]), int(bbox[0])), (int(bbox[3]), int(bbox[2])), colors[idx], 2)
                 cv2.putText(frame, labels[idx], (int(bbox[1]),int(bbox[0]-10)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, colors[idx], 2)
-
     writer.write(frame)
-    
+  
 video.release()
 writer.release()
 sess.close()
