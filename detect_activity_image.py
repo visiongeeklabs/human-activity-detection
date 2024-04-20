@@ -17,9 +17,7 @@ image_exp = np.expand_dims(image, axis=0)
 
 with open("labels.txt", 'r') as f:
   labels = [line.strip() for line in f.readlines()]
-
-colors = np.random.uniform(0, 255, size=(80, 3))
-
+  
 with tf.Graph().as_default():
   graph_def = tf.GraphDef()
 
@@ -58,6 +56,8 @@ with tf.Graph().as_default():
     output_dict['detection_scores'] = output_dict['detection_scores'][0]
     
     threshold = 0.5
+    colors = np.random.uniform(0, 255, size=(80, 3))
+    
     for i in range(output_dict['num_detections']):
       if int(output_dict['detection_classes'][i]) not in [1,3,17,37,43,45,46,47,59,65,74,77,78,79,80]:
         if output_dict['detection_scores'][i] > threshold:
