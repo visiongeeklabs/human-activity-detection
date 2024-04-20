@@ -18,6 +18,8 @@ image_exp = np.expand_dims(image, axis=0)
 with open("labels.txt", 'r') as f:
   labels = [line.strip() for line in f.readlines()]
 
+colors = np.random.uniform(0, 255, size=(80, 3))
+
 with tf.Graph().as_default():
   graph_def = tf.GraphDef()
 
@@ -68,8 +70,9 @@ with tf.Graph().as_default():
           bbox[2] *= h
           bbox[3] *= w
           print((int(bbox[1]), int(bbox[0])), (int(bbox[3]), int(bbox[2])))
-          cv2.rectangle(image, (int(bbox[1]), int(bbox[0])), (int(bbox[3]), int(bbox[2])), (0,255,0), 2)
-          cv2.putText(image, labels[int(output_dict['detection_classes'][i])-1], (int(bbox[1]),int(bbox[0]-10)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,0), 2)
+          idx = int(output_dict['detection_classes'][i]) - 1
+          cv2.rectangle(image, (int(bbox[1]), int(bbox[0])), (int(bbox[3]), int(bbox[2])), colors[idx], 2)
+          cv2.putText(image, labels[idx], (int(bbox[1]),int(bbox[0]-10)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, colors[idx], 2)
 
 cv2.imshow("Human Activity Detection", image)
 cv2.waitKey()
