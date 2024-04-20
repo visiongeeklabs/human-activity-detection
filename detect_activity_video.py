@@ -37,8 +37,8 @@ with detection_graph.as_default():
 
     image_tensor = tf.get_default_graph().get_tensor_by_name('image_tensor:0')
 
-
-video = cv2.VideoCapture(sys.argv[1])
+vid_path = sys.argv[1]
+video = cv2.VideoCapture(vid_path)
 
 if not video.isOpened():
     print("Could not open video")
@@ -47,11 +47,12 @@ if not video.isOpened():
 width = video.get(cv2.CAP_PROP_FRAME_WIDTH)
 height = video.get(cv2.CAP_PROP_FRAME_HEIGHT)
 fps = video.get(cv2.CAP_PROP_FPS)
+total_frames = video.get(cv2.CAP_PROP_FRAME_COUNT)
 
 fourcc = cv2.VideoWriter_fourcc(*'MJPG')
 writer = cv2.VideoWriter('activity_detection_output.mp4', fourcc, int(fps), (int(width),int(height)))
 
-
+frame_count = 0
 while video.isOpened():
 
     status, frame = video.read()
@@ -59,6 +60,9 @@ while video.isOpened():
     if not status:
         break
     
+    frame_count += 1
+    print("Processing frame {}/{}".format(frame_count, total_frames))
+  
     frame_exp = np.expand_dims(frame, axis=0)
     t1 = time.time()
     output_dict = sess.run(tensor_dict, feed_dict={image_tensor: frame_exp})
