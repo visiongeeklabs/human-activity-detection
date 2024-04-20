@@ -11,14 +11,16 @@ with open(PATH_TO_LABELS, 'r') as f:
   labels = [line.strip() for line in f.readlines()]
 
 detection_graph = tf.Graph()
-
 with detection_graph.as_default():
     od_graph_def = tf.GraphDef()
-
+    
+    t1 = time.time()
     fid = tf.gfile.GFile(PATH_TO_FROZEN_GRAPH, 'rb')
     serialized_graph = fid.read()
     od_graph_def.ParseFromString(serialized_graph)
     tf.import_graph_def(od_graph_def, name='')
+    t2 = time.time()
+    print("model loading time: ", t2 - t1)
 
     sess = tf.Session(graph=detection_graph)
 
