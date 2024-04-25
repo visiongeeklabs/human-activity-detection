@@ -48,7 +48,7 @@ height = video.get(cv2.CAP_PROP_FRAME_HEIGHT)
 fps = video.get(cv2.CAP_PROP_FPS)
 total_frames = video.get(cv2.CAP_PROP_FRAME_COUNT)
 
-fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 writer = cv2.VideoWriter('activity_detection_output.mp4', fourcc, int(fps), (int(width),int(height)))
 
 frame_count = 0
