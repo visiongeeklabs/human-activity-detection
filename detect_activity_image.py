@@ -12,7 +12,7 @@ img_path = sys.argv[1]
 
 image = cv2.imread(img_path)
 h, w, c = image.shape
-print(h, w, c)
+print(w, h, c)
 image_exp = np.expand_dims(image, axis=0)
 
 with open("labels.txt", 'r') as f:
