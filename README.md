@@ -31,7 +31,7 @@ python detect_activity_video.py sample_inputs/input_video.mp4
 ```
 
 ## Limitations
-There are some known limitations to this model that we need to keep in mind while using it.
+There are some known limitations to this model that need to be kept in mind while using it.
 - It is an object detection model working on a single frame at a time. It doesn’t really have the memory of previous frames. For complex actions, it is important for the model to know what was happening in previous frames.
 - Faster-RCNN with ResNet101 backbone is a heavy model. It is recommended to run on a reasonably powerful GPU for faster processing.
 - Sometimes the same person might be doing multiple activities like watching a person while standing. The model produces separate bounding boxes for each activity for the same person which might make the output image clumsy (that is why we have omitted few classes from processing).
@@ -40,6 +40,6 @@ There are some known limitations to this model that we need to keep in mind whil
 If you are getting value out of this work, please consider supporting on [Patreon](https://www.patreon.com/arunponnusamy) and unlock exclusive perks such as 
 - Downloadable PDFs
 - Ready to run Google Colab notebooks 
-- Early access to the blog posts and video tutorials
+- Early access to blog posts and video tutorials
 - Hands-on live coding sessions and Q&A
 - Access to exclusive Discord Server
