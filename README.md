@@ -1,5 +1,7 @@
 # Human Activity Detection with TensorFlow and Python
-A simple baseline object detection model (Faster-RCNN with ResNet101 backbone) that can detect basic human activities like walking, running, sitting etc from image and video. The model is pre-trained on the [Google AVA Actions dataset](https://research.google.com/ava/) which contains the bounding box annotations for 60 basic human actions like sit, stand, walk, run etc. The entire list can be found on the [label file](labels.txt).
+![](sample_outputs/output_image3.jpg)
+
+A simple baseline object detection model (Faster-RCNN with ResNet101 backbone) that can detect basic human activities like walking, running, sitting etc from image and video. The model is pre-trained on the [Google AVA Actions](https://research.google.com/ava/)  dataset which contains the bounding box annotations for 60 basic human actions like sit, stand, walk, run etc. The entire list can be found on the [label file](labels.txt).
 
 ## Installation
 Install the dependencies using the commands below.
@@ -38,6 +40,6 @@ There are some known limitations to this model that we need to keep in mind whil
 If you are getting value out of this work, please consider supporting on [Patreon](https://www.patreon.com/arunponnusamy) and unlock exclusive perks such as 
 - Downloadable PDFs
 - Ready to run Google Colab notebooks 
-- Early access to the blog posts
+- Early access to the blog posts and video tutorials
 - Hands-on live coding sessions and Q&A
 - Access to exclusive Discord Server
